@@ -164,7 +164,9 @@ function findLevel()
 	{
 		levelNumber++;
 		localStorage.setItem("level", levelNumber);
-		
+		minScore = glassCount;
+		minNote = ass[levelNumber].value;
+				
 		//for (var l = 0; l < levelNumber; l++)
 		//{
 		//localStorage.removeItem(ass[l].value + "_score");
