@@ -1,0 +1,164 @@
+#gameframe
+{
+	position: absolute;
+	left: 20%;
+	top: 0px;
+	width: 60%;
+	height: 100%;
+	/*background: blue;
+	/*border: 1px solid blue;*/
+}
+
+#keyboard
+{
+	position: absolute;
+	left: 0px;
+	top: 40%;
+	width: 100%;
+	background: black;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#glassboard
+{
+	position: absolute;
+	left: 0px;
+	/*top: 0px;*/
+	width: 100%;
+	/*background: blue;*/
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#glassboard div
+{
+	width: 30px;
+	height: 50px;
+	/*border: 1px solid red;*/
+	color: white;
+	font-weight: bold;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.whiteGlass
+{
+	position: absolute;
+	background: lightgray;
+}
+
+.blackGlass
+{
+	position: absolute;
+	background: silver;
+}
+
+.white
+{
+	position: absolute;
+	top: 0px;
+	background: white;
+	/*border: 1px solid red;*/
+}
+
+.black
+{
+	position: absolute;
+	top: 0px;
+	background: black;
+	/*border: 1px solid green;*/
+	color: red;
+}
+
+
+.whiteFrosen
+{
+	position: absolute;
+	top: 0px;
+	background: aliceblue;
+	/*border: 1px solid red;*/
+}
+
+.blackFrosen
+{
+	position: absolute;
+	top: 0px;
+	background: slategray;
+	/*border: 1px solid green;*/
+	color: red;
+}
+
+#start
+{
+	position: absolute;
+	bottom: 0px;
+	left: 0px;
+	width: 100%;
+	font-weight: bold;
+	border-radius: 100px/95px;
+}
+
+#board
+{
+	position:absolute;
+	top: 25%;
+	left: 30%;
+	width: 40%;
+	height: 40%;
+	font-weight: bold;
+	border-radius: 100%;
+	background: gainsboro;
+}
+
+#countHolder
+{
+	position: absolute;
+	top: 15%;
+	left: 35%;
+	width: 30%;
+	height: 20%;
+	border-radius: 100%;
+	background: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#count
+{
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+#bugHolder
+{
+	position: absolute;
+	top: -25px;
+	background:black;
+}
+
+#bug
+{
+	position: absolute;
+	top: 10px;
+	left: 0px;
+	width: 15px;
+	height: 15px;
+	background: chocolate;
+	border-radius: 50px;
+}
+
+.target
+{
+	position: absolute;
+	left: calc(50% - 9px);
+	top: calc(90% - 10px);
+	width: 15px;
+	height: 15px;
+	/*border: 1px double red;*/
+}
