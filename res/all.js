@@ -15,6 +15,8 @@ function levelChange(direct)
 	
 	if (direct === 1) localStorage.setItem("level", lev+1);
 	if (direct === 0) localStorage.setItem("level", lev-1);
+		
+	findLevel();
 }
 
 var notes;// = document.getElementById("c4");
