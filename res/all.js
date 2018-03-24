@@ -14,8 +14,25 @@ function levelChange(direct)
 	var lev = Number(localStorage.getItem("level"));
 	
 	if (direct === 1) localStorage.setItem("level", lev+1);
-	if (direct === 0) localStorage.setItem("level", lev-1);
+	if (direct === 0)
+	{
+		var noteToFreese = ass[lev];
+		let note = document.getElementById(noteToFreese.value);
+		let glass = document.getElementById(noteToFreese.value + "_glass");
 		
+		note.setAttribute("class", noteToFreese.activeClass + "Frosen");
+		note.status = "frosen";
+		
+		glass.setAttribute("class", noteToFreese.activeClass + "Glass");
+		
+		if (noteToFreese.activeClass === "white") glass.style.background = "lightgray";
+		else glass.style.background = "silver";
+		
+		glass.innerHTML = "";
+		
+		localStorage.setItem("level", lev-1);
+	}
+	
 	findLevel();
 }
 
