@@ -180,5 +180,7 @@
 <button id = "reset" value = "reset" onclick = "resetAll()">reset</button>
 <button onclick = "levelChange(1)">level++</button>
 <button onclick = "levelChange(0)">level--</button>
+<p>Между ответами: <input type = "number" id = "countTimer" min = "0" max = "5" step = "0.5" value = "" onchange = "setTimeToCount(this.value)"></p>
+<p>Время на ответ: <input type = "number" id = "answerTimer" min = "1" max = "10" step = "0.5" value = "" onchange = "setTimeToAnswer(this.value)"></p>
 </body>
 </html>
