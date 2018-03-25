@@ -1,5 +1,7 @@
 function resetAll()
 {alert("RESET");
+	localStorage.removeItem("timeToCount");
+	localStorage.removeItem("timeToAnswer");
 	localStorage.removeItem("level");
 	for (var r = 0; r < ass.length; r++)
 	{
@@ -125,6 +127,9 @@ var minNote = "";
 	
 function findLevel()
 {
+	setTimeToCount();
+	setTimeToAnswer();
+	
 	levelNumber = Number(localStorage.getItem("level"));
 	
 	if(levelNumber === 0)
@@ -185,7 +190,7 @@ function findLevel()
 		localStorage.setItem("level", levelNumber);
 		minScore = glassCount;
 		minNote = ass[levelNumber].value;
-				
+		//alert(minNote);
 		//for (var l = 0; l < levelNumber; l++)
 		//{
 		//localStorage.removeItem(ass[l].value + "_score");
@@ -197,6 +202,19 @@ function findLevel()
 		findLevel();
 	}
 }
+
+var timeToCount;
+
+function setTimeToCount(num)
+{
+	if (num >= 0) localStorage.setItem("timeToCount", num);
+	
+	if(localStorage.getItem("timeToCount") !== null && Number(localStorage.getItem("timeToCount")) >= 0) timeToCount = Number(localStorage.getItem("timeToCount"));
+	
+	else timeToCount = 3;
+	
+	document.getElementById("countTimer").value = timeToCount;
+	}
 
 
 function counting(counter)
@@ -210,20 +228,20 @@ function counting(counter)
 	{
 		counter = 0;
 		count.innerHTML = 3 - counter;
-		timerCount = setTimeout(counting, 1000, counter);
+		timerCount = setTimeout(counting, timeToCount / 3 * 1000, counter);
 	}
 	
 	else if (counter !== "undefined" && counter < 3)
 	{
 		count.innerHTML = 3 - counter;
 		counter++;
-		timerCount = setTimeout(counting, 1000, counter);
+		timerCount = setTimeout(counting, timeToCount / 3* 1000, counter);
 	}
 	
 	else
 	{
 		count.innerHTML = "0";
-		setTimeout(chooseNote, 1000);
+		setTimeout(chooseNote, timeToCount / 3 * 1000);
 	}
 }
 
@@ -231,7 +249,19 @@ var noteChoosenNum;
 var noteChoosen;
 var played = ["a", "b", "c"];
 
-//var timeToAnswer;
+var timeToAnswer;
+
+function setTimeToAnswer(num)
+{
+	if (num >= 1) localStorage.setItem("timeToAnswer", num);
+	
+	if(localStorage.getItem("timeToAnswer") !== null && Number(localStorage.getItem("timeToAnswer")) >= 1) timeToAnswer = Number(localStorage.getItem("timeToAnswer"));
+	
+	else timeToAnswer = 10;
+	
+	document.getElementById("answerTimer").value = timeToAnswer;
+}
+
 
 function valuation(keyID)
 {//alert(keyID);
@@ -319,7 +349,7 @@ else
 			var bugTranslateX = document.getElementById(noteChoosen).getElementsByClassName('target')[0].getBoundingClientRect().left - document.getElementById("gameframe").getBoundingClientRect().left - bugHomeX + 1;
 			var bugTranslateY = document.getElementById(noteChoosen).getElementsByClassName('target')[0].getBoundingClientRect().top + 25 + 1;
 			//bug.addEventListener('transitionend', valuation, this.id);
-			var timeToAnswer = 10;//12 - Number(localStorage.getItem(noteChoosen + "_score"));
+			//var timeToAnswer = 10;//12 - Number(localStorage.getItem(noteChoosen + "_score"));
 		
 			if (Number(document.getElementById(noteChoosen+"_glass").innerHTML) === 10)
 			{
