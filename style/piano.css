@@ -162,3 +162,31 @@
 	height: 15px;
 	/*border: 1px double red;*/
 }
+
+.colorHolder
+{
+	position: absolute;
+	left: 0px;
+	top: 0px;
+	margin: 0px;
+	height: 100%;
+	width: 100%;
+}
+
+.color
+{
+	position: inherit;
+	left: inherit;
+	top: inherit;
+	margin: inherit;
+	height: inherit;
+	width: inherit;
+	background: inherit;
+	opacity: 0;
+}
+
+@keyframes play {
+from {opacity: 0;}
+1.5% {opacity: 100;}
+to {opacity: 0;}
+}

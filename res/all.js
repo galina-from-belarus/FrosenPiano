@@ -53,10 +53,28 @@ notes = document.getElementById("sounds").getElementsByTagName("source");
 players = document.getElementById("players").getElementsByTagName("audio");
 }
 
+function coloring(keyID)
+{
+	var key = document.getElementById(keyID);
+	var keyColor = key.style.background;
+	var glassColor = document.getElementById(keyID + "_glass").style.background;
+	
+	let colorHolder = key.getElementsByClassName("colorHolder")[0];
+		colorHolder.innerHTML = "<div class = \"color\"></div>";
+		
+	let color = colorHolder.getElementsByClassName("color")[0];
+		color.style.background = glassColor;
+	
+	color.style.animation = "play 2s 1 ease-in-out backwards";
+	return;
+}
 
 function inputValue(keyID)
 {
-	if(noteChoosen === undefined) playSound(keyID);
+	if(noteChoosen === undefined)
+	{
+		playSound(keyID);
+	}
 	
 	else 
 	{
@@ -89,6 +107,7 @@ function playSound(keyID)
 			var player = new Audio();
 			player.ready = 1;
 			player.src = soundLink;
+			coloring(keyID);
 			player.play();
 		}
 		//alert(document.getElementsByTagName('audio').length);
@@ -154,7 +173,8 @@ function findLevel()
 		var glass = document.getElementById(ass[l].value + "_glass");
 			glass.style.background = ass[l].color;
 			
-		var glassCount = Number(localStorage.getItem(ass[l].value + "_score"));
+
+			var glassCount = Number(localStorage.getItem(ass[l].value + "_score"));
 		
 			if(glassCount === null)
 			{
@@ -216,7 +236,10 @@ function setTimeToCount(num)
 	document.getElementById("countTimer").value = timeToCount;
 	}
 
+var click = document.getElementById("click");
+	click.volume = 0.1;
 
+	
 function counting(counter)
 {	
 	if(counter === "break")
@@ -243,7 +266,9 @@ function counting(counter)
 		count.innerHTML = "0";
 		setTimeout(chooseNote, timeToCount / 3 * 1000);
 	}
+	click.play();	
 }
+
 
 var noteChoosenNum;
 var noteChoosen;
@@ -262,7 +287,9 @@ function setTimeToAnswer(num)
 	document.getElementById("answerTimer").value = timeToAnswer;
 }
 
-
+var fail = document.getElementById("fail");
+fail.volume = 0.25;
+			
 function valuation(keyID)
 {//alert(keyID);
 
@@ -271,11 +298,14 @@ function valuation(keyID)
 	if (keyID === noteChoosen && glassCount < 10)
 	{
 			glassCount++;
+			playSound(keyID);
 	}
 
-	else if (keyID !== noteChoosen && glassCount > 0)
+	else if (keyID !== noteChoosen)
 	{
-			glassCount--;
+			if(glassCount > 0) glassCount--;
+			fail.play();
+			//alert(fail.volume);
 	}
 	
 	document.getElementById("bugHolder").innerHTML = "";
@@ -284,7 +314,7 @@ function valuation(keyID)
 	noteChoosenNum = undefined;
 	noteChoosen = undefined;
 	findLevel();
-	counting(0);
+	setTimeout(counting, 1000, 0);
 }
 
 
