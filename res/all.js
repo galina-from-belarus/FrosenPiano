@@ -297,7 +297,7 @@ function valuation(keyID)
 	
 	if (keyID === noteChoosen)
 	{
-		if(glassCount < 10)	glassCount++;
+		if(glassCount < 10) glassCount++;
 		playSound(keyID);
 	}
 
