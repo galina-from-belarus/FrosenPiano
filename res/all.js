@@ -295,17 +295,17 @@ function valuation(keyID)
 
 	var glassCount = Number(localStorage.getItem(noteChoosen + "_score"));
 	
-	if (keyID === noteChoosen && glassCount < 10)
+	if (keyID === noteChoosen)
 	{
-			glassCount++;
-			playSound(keyID);
+		if(glassCount < 10)	glassCount++;
+		playSound(keyID);
 	}
 
 	else if (keyID !== noteChoosen)
 	{
-			if(glassCount > 0) glassCount--;
-			fail.play();
-			//alert(fail.volume);
+		if(glassCount > 0) glassCount--;
+		fail.play();
+		//alert(fail.volume);
 	}
 	
 	document.getElementById("bugHolder").innerHTML = "";
