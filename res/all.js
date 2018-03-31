@@ -108,7 +108,7 @@ function startGame()
 	
 	else
 	{
-		//bugHolder.innerHTML = "";
+		bugHolder.innerHTML = "";
 		count.innerHTML = "stopped";
 		start.innerHTML = "START";
 		document.getElementById("bugHolder").innerHTML = "";
