@@ -129,10 +129,9 @@ function playSound(keyID)
 
 function startGame()
 {
-	findLevel();
-	
 	if (start.innerHTML === "START")
 	{
+		findLevel();
 		start.innerHTML = "STOP";
 		counting(0);
 	}
