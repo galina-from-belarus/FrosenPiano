@@ -13,14 +13,24 @@ function resetAll()
 
 function levelChange(direct)
 {
-	var lev = Number(localStorage.getItem("level"));
+	let lev = Number(localStorage.getItem("level"));
 	
+
 	if (direct === 1) localStorage.setItem("level", lev+1);
+
 	if (direct === 0)
 	{
 		var noteToFreese = ass[lev];
+		var noteToNull = ass[lev-1];
+		
+		localStorage.removeItem(noteToFreese.value + "_score");
+		localStorage.setItem(noteToNull.value + "_score", 0);
+		
 		let note = document.getElementById(noteToFreese.value);
+		let note1 = document.getElementById(noteToNull.value);
+		
 		let glass = document.getElementById(noteToFreese.value + "_glass");
+		let glass1 = document.getElementById(noteToNull.value + "_glass");
 		
 		note.setAttribute("class", noteToFreese.activeClass + "Frosen");
 		note.status = "frosen";
@@ -31,10 +41,12 @@ function levelChange(direct)
 		else glass.style.background = "silver";
 		
 		glass.innerHTML = "";
+		glass1.innerHTML = 0;
 		
 		localStorage.setItem("level", lev-1);
+		
 	}
-	
+
 	findLevel();
 }
 
@@ -127,7 +139,7 @@ function startGame()
 	
 	else
 	{
-		//bugHolder.innerHTML = "";
+		bugHolder.innerHTML = "";
 		count.innerHTML = "stopped";
 		start.innerHTML = "START";
 		document.getElementById("bugHolder").innerHTML = "";
