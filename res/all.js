@@ -18,7 +18,7 @@ function levelChange(direct)
 
 	if (direct === 1) localStorage.setItem("level", lev+1);
 
-	if (direct === 0)
+	if (direct === 0 && lev > 1)
 	{
 		var noteToFreese = ass[lev];
 		var noteToNull = ass[lev-1];
@@ -40,13 +40,11 @@ function levelChange(direct)
 		if (noteToFreese.activeClass === "white") glass.style.background = "lightgray";
 		else glass.style.background = "silver";
 		
-		glass.innerHTML = "";
-		glass1.innerHTML = 0;
+		glass.childNodes[0].innerHTML = "";
+		glass1.childNodes[0].innerHTML = 0;
 		
 		localStorage.setItem("level", lev-1);
-		
 	}
-
 	findLevel();
 }
 
@@ -169,10 +167,12 @@ function findLevel()
 	}
 
 	var score = 0;
+	
 	for (var l = 0; l <= levelNumber; l++)
 	{
 		var note = document.getElementById(ass[l].value);
 		var noteStatus = note.getAttribute("status");
+		var glassCount = Number(localStorage.getItem(ass[l].value + "_score"));
 		
 		if(noteStatus === "frosen")
 		{
@@ -183,9 +183,9 @@ function findLevel()
 			
 		var glass = document.getElementById(ass[l].value + "_glass");
 			glass.style.background = ass[l].color;
+		var label = glass.childNodes[0];
+			label.style.background = "white";
 			
-
-			var glassCount = Number(localStorage.getItem(ass[l].value + "_score"));
 		
 			if(glassCount === null)
 			{
@@ -199,7 +199,7 @@ function findLevel()
 				minNote = ass[l].value;
 			}
 			
-			glass.innerHTML = glassCount;
+			label.innerHTML = glassCount;
 			//alert(glass.style.backgroundColor);
 			//alert(note.getAttribute("status"));
 			findLevel();
@@ -207,9 +207,9 @@ function findLevel()
 		
 		else
 		{
-			var glassScore = Number(document.getElementById(ass[l].value + "_glass").innerHTML);
+			//var glassScore = Number(document.getElementById(ass[l].value + "_glass").innerHTML);
 			//alert(glassScore);
-			score += Number(glassScore);
+			score += glassCount;
 			//alert(score);
 		}
 	}
@@ -228,7 +228,7 @@ function findLevel()
 		//document.getElementById(ass[l].value + "_glass").innerHTML = 0;
 		//}
 		
-		document.getElementById(ass[levelNumber].value + "_glass").innerHTML = 0
+		document.getElementById(ass[levelNumber].value + "_glass").childNodes[0].innerHTML = 0
 		//alert(levelNumber);
 		findLevel();
 	}
@@ -320,7 +320,7 @@ function valuation(keyID)
 	}
 	
 	document.getElementById("bugHolder").innerHTML = "";
-	document.getElementById(noteChoosen + "_glass").innerHTML = glassCount;
+	document.getElementById(noteChoosen + "_glass").childNodes[0].innerHTML = glassCount;
 	localStorage.setItem(noteChoosen + "_score", glassCount);
 	noteChoosenNum = undefined;
 	noteChoosen = undefined;
@@ -343,7 +343,6 @@ else
 {
 	noteChoosenNum = rand(0, levelNumber);
 	noteChoosen = ass[noteChoosenNum].value;
-	
 	var repeats = 0;
 	
 	for (var n = 0; n < played.length; n++)
@@ -365,7 +364,7 @@ else
 		chooseNote();
 	}
 }
-	
+
 	var question = document.getElementById("question");
 	var questionLink = document.getElementById(noteChoosen + "_sound").getAttribute("src");//"/sound/" + noteChoosen + ".mp3";
 	question.src = questionLink;
@@ -392,14 +391,13 @@ else
 			//bug.addEventListener('transitionend', valuation, this.id);
 			//var timeToAnswer = 10;//12 - Number(localStorage.getItem(noteChoosen + "_score"));
 		
-			if (Number(document.getElementById(noteChoosen+"_glass").innerHTML) === 10)
+			if (score === 10)
 			{
 				bugTranslateX = 0;
 				bugTranslateY = 0;
 			//	timeToAnswer = 10;
 			}
-			
-			
+						
 			//timeToAnswer = setTimeout(valuation, timeToAns);
 			bug.style.transitionDuration = timeToAnswer + "s";
 			bug.style.transform = "translate(" + bugTranslateX + "px, " + bugTranslateY + "px)";
