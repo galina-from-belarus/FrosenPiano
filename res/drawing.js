@@ -62,6 +62,12 @@ function writeCSS()
 	var whiteGlassGap = (whitesWidth - glassWidth) * 0.5;
 	var blacksGap = whitesWidth - blacksWidth * 0.5 - marginSize;
 	
+	// Задаем размер наклеек
+	var labelWidth = glassWidth * 0.75;
+	var labelHeight = labelWidth;
+	
+	//alert(glassWidth + "||" + labelHeight);
+	
 	// Высоту кнопки старта устанавливаем в белую клавишу.
 	var start = document.getElementById("start");
 	start.style.height = whitesWidth + "px";
@@ -87,6 +93,11 @@ function writeCSS()
 			glass.style.width = glassWidth + "px";
 			glass.style.height = glassHeight + "px";
 			//glass.style.background = ass[w].color;
+			
+		// Наклейки
+		var label = glass.childNodes[0];
+			label.style.height = labelHeight + "px";
+			label.style.width = labelWidth + "px";
 	}
 	
 	// Прописываем стили черных
@@ -112,6 +123,11 @@ function writeCSS()
 			glass.style.left = blacksGap + whitesWidth * (b + space) + marginSize + blacksWidth / 2 - glassWidth / 2 + "px";
 			glass.style.width = glassWidth + "px";
 			glass.style.height = glassHeight + "px";
+
+			// Наклейки
+		var label = glass.childNodes[0];
+			label.style.height = labelHeight + "px";
+			label.style.width = labelWidth + "px";
 	}
 	setVar();
 }
